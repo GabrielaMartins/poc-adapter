@@ -2,6 +2,7 @@ package com.adapter.sms.controllers
 
 import com.adapter.sms.models.SmsAdapterMessageInput
 import com.adapter.sms.services.SmsAdapterService
+import com.adapter.sms.services.SmsAdapterServiceAbstract
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 class SmsAdapterController(
-    private val smsAdapterService: SmsAdapterService
+    private val smsAdapterService: SmsAdapterServiceAbstract
 ) {
     @PostMapping(value = ["/send-messages"], produces = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseBody

@@ -10,11 +10,17 @@ import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 
 
+
+interface SmsAdapterServiceAbstract{
+    fun sendMessage(sms: SmsAdapterMessageInput): String
+    fun replyMessage(body: String, from: String): MessagingResponse
+}
+
 @Service
-class SmsAdapterService {
+class SmsAdapterService: SmsAdapterServiceAbstract {
     private val logger: org.slf4j.Logger? = LoggerFactory.getLogger("SmsAdapterService")
 
-    fun sendMessage(sms: SmsAdapterMessageInput): String {
+    override fun sendMessage(sms: SmsAdapterMessageInput): String {
         val message = Message.creator(
             PhoneNumber(sms.phoneReceiver),
             PhoneNumber(sms.phoneSender),
@@ -29,7 +35,7 @@ class SmsAdapterService {
         }
     }
 
-    fun replyMessage(body: String, from: String): MessagingResponse {
+    override fun replyMessage(body: String, from: String): MessagingResponse {
         var message = ""
 
         if (body == "hello") {
